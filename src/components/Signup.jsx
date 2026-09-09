@@ -6,11 +6,19 @@ import { login } from "../store/authSlice";
 import {Button , Input ,Logo} from './index'
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-
+import {email, string, z} from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 function    Signup(){
+    const zodValidate = z.object({
+        name : z.string().min(3, "name must be at least 3 characters long"),
+        email : z.email(),
+        password : z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/, "Password needs uppercase, lowercase, number, and special character")
+    })
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {register , handleSubmit} = useForm();
+    const {register , handleSubmit , formState:{errors}} = useForm({
+        resolver : zodResolver(zodValidate)
+    });
     const [error, setError] = useState("");
 
     const createAcc = async(data) =>{
@@ -55,41 +63,27 @@ function    Signup(){
                     <div className="flex flex-col gap-5">
                             <Input
                                 label = "Full name : "
+                                error = {errors.name?.message}
                                 placeholder ="Enter your full name"
-                                {...register("name",
-                                    {
-                                        required : true,
-                                        minLength:3
-                                    }
+
                                 
-                                )}
+                                {...register("name")}
                             />
 
                              <Input
                                 label = "Email"
+                                error = {errors.email?.message}
                                 placeholder = "Enter your email"
                                 type = "email"
-                                {...register("email",{
-                                    required:"Email is required",
-                                        pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "Invalid email address"
-                                    }
-                                })}
+                                {...register("email")}
                             />
 
                             <Input
                             label = "password"
+                            error = {errors.password?.message}
                             type = "password"
                             placeholder = "Enter your password"
-                            {...register("password",{
-                                required:true,
-                                 pattern :{
-                                    //  Adds: at least one special character too
-                                    value : /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/,
-                                    message:" Adds: at least one special character too"
-                                }
-                            })}
+                            {...register("password")}
                             />
                             <Button
                             type="submit"

@@ -2,12 +2,14 @@
         const Input =  React.forwardRef(
             function Input({
                 label,
+                error,
                 type = "text",
                 className ='',
                 ...props
 
             },ref){
                 const id = useId();
+
 
                 return (
                     <div className="w-full">
@@ -23,6 +25,8 @@
                             id={id}
                             {...props}
                             />
+                        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+
                     </div>
                 )
             }
