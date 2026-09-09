@@ -16,6 +16,7 @@ A full-stack blogging platform built with **React**, **Redux Toolkit**, and **Ap
 - 🔗 **Auto-generated slugs** — URL-friendly slugs generated automatically from the post title
 - 🔒 **Protected routes** — edit/delete actions restricted to the post's author
 - 📱 **Responsive UI** — built with Tailwind CSS
+-  ✅ **Schema-based validation** — form validation (signup, etc.) handled with Zod schemas via React Hook Form
 
 ---
 
@@ -29,6 +30,7 @@ A full-stack blogging platform built with **React**, **Redux Toolkit**, and **Ap
 | Editor     | TinyMCE                              |
 | Backend    | Appwrite (Auth, Databases, Storage)  |
 | Build Tool | Vite                                 |
+| Validation | Zod + @hookform/resolvers            |
 
 ---
 
@@ -92,7 +94,7 @@ Building this project involved working through real-world issues beyond just wri
 - Handling async/await pitfalls that silently return unresolved Promises
 - Diagnosing storage permission errors and plan-based feature restrictions on a BaaS platform
 - Keeping cloud credentials out of version control with environment variables
-
+- Migrating from React Hook Form's inline validation rules to schema-based validation with Zod
 ---
 
 ## Roadmap
