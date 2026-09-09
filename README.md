@@ -2,7 +2,7 @@
 
 A full-stack blogging platform built with **React**, **Redux Toolkit**, and **Appwrite** as the backend-as-a-service. Users can sign up, log in, and create, edit, publish, and delete blog posts with rich text content and featured images.
 
-**Live Demo:** _add your deployed link here (Vercel/Netlify)_
+
 
 ---
 
