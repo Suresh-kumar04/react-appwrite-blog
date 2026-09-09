@@ -72,8 +72,8 @@ function PostForm({post}){
                 if(name == 'title'){
                     setValue('slug',slugTransform(value
                         .title
-                    ))
-                    {shouldValidate : true  }
+                    ), {shouldValidate : true  })
+                   
                 }
             })
             return ()=>{
