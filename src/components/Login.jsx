@@ -5,11 +5,21 @@ import {Button,Input,Logo} from './index'
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import {useForm} from 'react-hook-form'
-
+import {z} from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
 function Login(){
+    const zodValidate = z.object({
+        email : z.email(),
+        password : z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/,"Password needs uppercase, lowercase, number, and special character")
+    })
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {register,handleSubmit} = useForm();
+    const {register,handleSubmit,formState:{errors}} = useForm(
+        {
+            resolver:zodResolver(zodValidate)
+        }
+    );
+    console.log(errors)
     const [error,setError] = useState("")
 
     const login = async(data)=>{
@@ -50,32 +60,21 @@ function Login(){
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}     
 
-                <form onSubmit={handleSubmit(login) } className="mt-8">
+                <form onSubmit={handleSubmit(login) } className="mt-8" noValidate>
                     <div className="flex flex-col gap-5">
                         <Input
                             label = "Email"
+                            error = {errors.email?.message}
                             placeholder = "Enter your email"
                             type = "email"
-                            {...register("email",{
-                                required:"Email is required",
-                                 pattern: {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: "Invalid email address"
-                                }
-                            })}
+                            {...register("email")}
                         />
                         <Input
                             label = "Password"
+                            error = {errors.password?.message}
                             type = "password"
                             placeholder="Enter your password"
-                            {...register("password",{
-                                required : true,
-                                pattern :{
-                                    //  Adds: at least one special character too
-                                    value : /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/,
-                                    message:" Adds: at least one special character too"
-                                }
-                            })}
+                            {...register("password")}
                         />
                         <Button
                             type="submit"
@@ -89,5 +88,6 @@ function Login(){
             </div>
             
         </div>
+        
     )
 }export default Login;

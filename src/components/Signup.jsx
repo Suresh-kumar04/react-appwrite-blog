@@ -59,7 +59,7 @@ function    Signup(){
                 {error&& <p className="text-red-600 mt-8 text-center">{error}</p>}
 
 
-                <form onSubmit={handleSubmit(createAcc)} className="mt-8">
+                <form onSubmit={handleSubmit(createAcc)} className="mt-8" noValidate>
                     <div className="flex flex-col gap-5">
                             <Input
                                 label = "Full name : "
