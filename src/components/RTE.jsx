@@ -13,6 +13,7 @@ export default function RTE({name,control,label,defaultValue =""}){
                     <Editor
                         initialValue ={defaultValue}
                         init ={{
+                              paste_as_text: true,
                         plugins: [
                             'advlist autolink lists link image charmap print preview anchor',
                             'searchreplace visualblocks code fullscreen',
