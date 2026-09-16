@@ -11,14 +11,16 @@ function PostForm({post}){
         {
             defaultValues:{
                 title : post?.title || '',
-                slug : post?.slug || '',
-                contenet : post?.contenet || '',
+                slug : post?.$id || '',
+                content : post?.content || '',
                 status : post?.status || 'active' 
             }
         }
      );
      const navigate = useNavigate();
      const userData = useSelector(state => state.auth.userData);
+            //   console.log("post is",Object.keys(post))
+
 
      const submit = async (data)=>{
         if(post){
@@ -68,6 +70,7 @@ function PostForm({post}){
 
 
         useEffect(()=>{
+            //   console.log("slug default on mount:", getValues("slug"));
             const subsciption = watch((value,{name})=>{
                 if(name == 'title'){
                     setValue('slug',slugTransform(value

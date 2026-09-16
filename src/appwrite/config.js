@@ -19,7 +19,7 @@ export class Service{
             return await  this.database.createRow(
                 conf.appwriteDatabaseid,
                 conf.appwriteTableId,
-                slug,
+                slug+'-'+Date.now(),
                 {title,content,image:featuredImage,status,userId}
             )
         } catch (error) {
@@ -33,7 +33,7 @@ export class Service{
             return await this.database.updateRow(
                 conf.appwriteDatabaseid,
                 conf.appwriteTableId,
-                slug,{
+                slug ,{
                     title,
                     content,
                     image : featuredImage,

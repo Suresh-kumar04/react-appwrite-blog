@@ -6,7 +6,7 @@ import PostCard from '../components/Postcard'
 function Home(){
     const authStatus = useSelector(state=>state.auth.status);
     console.log('in home' ,authStatus);
-    {console.log( 'from home ',   service.getFilePreview("6a9af877003d6a9255bb"))}
+    // {console.log( 'from home ',   service.getFilePreview("6a9af877003d6a9255bb"))}
     const [post,setPosts] = useState([]);
     useEffect(()=>{
         service.getPosts().then((response)=>{
