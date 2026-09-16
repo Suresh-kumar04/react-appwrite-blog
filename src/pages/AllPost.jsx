@@ -1,18 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import service from "../appwrite/config";
 import { Container } from "../components";
 import PostCard from '../components/Postcard'
 import { useState,useEffect } from "react";
+import { useSelector } from "react-redux";
 function AllPost(){
     const[ post,setPost] = useState([])
+    const userData = useSelector(state => state.auth.userData)
     useEffect(()=>{
-         service.getPosts([]).then((posts)=>{
-        if(posts){
-            console.log(posts.rows);
-            
-            setPost(posts.rows)
-        }
-    })
-    },[])
+        if(userData?.$id){
+        service.getUserPosts(userData.$id).then((Response)=>{
+            if(Response){
+                setPost(Response.rows??[])
+            }
+        })
+    }
+},[userData])
    
     return(
         <div className="w-full py-8">

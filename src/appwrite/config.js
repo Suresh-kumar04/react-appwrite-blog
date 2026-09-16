@@ -27,7 +27,19 @@ export class Service{
         }
 
     }
-
+    async getUserPosts(userId){
+        try {
+            return await this.database.listRows(
+                conf.appwriteDatabaseid,
+                conf.appwriteTableId,
+                [Query.equal("userId",userId)],
+                100,0
+            )
+        } catch (error) {
+            console.log("error::getUserPosts")
+            return false
+        }
+    }
     async updatePost(slug,{title,content,featuredImage,status}){
         try {
             return await this.database.updateRow(
