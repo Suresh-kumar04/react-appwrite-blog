@@ -36,10 +36,13 @@ import Button from "./Button";
 
                         {type === "password" &&
                             (<Button
-                                children={ "👁"}
+                                
                                 onClick = {()=>setShowPass(prev => !prev)}
                                  className="absolute right-1 top-1/2 -translate-y-1/2 bg-transparent!"
-                            />)
+                            >
+                                👁
+                            </Button>
+                            )
                         }
                         </div>
                         {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
