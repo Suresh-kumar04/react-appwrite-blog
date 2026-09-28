@@ -7,10 +7,11 @@ import authService from "../appwrite/auth";
 import {useForm} from 'react-hook-form'
 import {z} from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
+import { fa } from "zod/v4/locales";
 function Login(){
     const zodValidate = z.object({
         email : z.email(),
-        password : z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/,"Password needs uppercase, lowercase, number, and special character")
+        password : z.string().min(1,"Password is required")
     })
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -75,6 +76,7 @@ function Login(){
                             type = "password"
                             placeholder="Enter your password"
                             {...register("password")}
+
                         />
                         <Button
                             type="submit"
