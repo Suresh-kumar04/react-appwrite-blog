@@ -40,7 +40,7 @@ import Post from './pages/Post.jsx'
           )
         },
         {
-          path : '/all-posts',
+          path : '/My-posts',
           element:(
             <AuthLayout>
               <AllPost/>

@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({post}){
+     console.log("Edit post image fields:", {
+     image: post?.image,
+     featuredImage: post?.featuredImage,
+   });
      const {register , handleSubmit,watch,setValue,control,getValues } = useForm(
         {
             defaultValues:{
@@ -20,7 +24,8 @@ function PostForm({post}){
      const navigate = useNavigate();
      const userData = useSelector(state => state.auth.userData);
             //   console.log("post is",Object.keys(post))
-
+            // console.log(post);
+            
 
      const submit = async (data)=>{
         if(post){
@@ -114,7 +119,7 @@ function PostForm({post}){
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={service.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.image)}
                             alt={post.title}
                             className="rounded-lg"
                         />
